@@ -49,18 +49,15 @@ class RandomPasteBin(PasteBin):
         if cur_time <= self.next_index_update:
             return
 
-        indexes = self.get_indexes()
-        if indexes is None:
-            self.indexes = None
-        else:
-            self.indexes = indexes['indexes']
+        self.indexes = self.get_indexes()
+        if self.indexes is not None:
             self.next_index_update = cur_time + 2*60
 
     def insert_text(self, text: Dict[str, str]):
         ret = super().insert_text(text)
 
         if ret is not None and self.indexes is not None:
-            self.indexes.append(ret['id'])
+            self.indexes['last_id'] = ret['id']
 
     def get_rand_text(self):
         self.update_indexes()
@@ -68,10 +65,10 @@ class RandomPasteBin(PasteBin):
         if  self.indexes is None:
             return {'id': ERROR_NO_CONNECTION, 'text': 'PasteBin server is not available'}
 
-        if not len(self.indexes):
+        if self.indexes['first_id'] > self.indexes['last_id']:
             return {'id': ERROR_EMPTY_SERVER, 'text': 'PasteBin server is empty'}
 
-        id = random.choice(self.indexes)
+        id = random.randint(self.indexes['first_id'], self.indexes['last_id'])
 
         ret = self.get_text(id)
 
