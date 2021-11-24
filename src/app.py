@@ -10,7 +10,7 @@ db = RandomPasteBin()
 
 
 @app.get("/texts", response_model=TextWithId)
-async def read_rand_text():
+def read_rand_text():
     try:
         ret = db.get_rand_text()
 
@@ -23,7 +23,7 @@ async def read_rand_text():
 
 
 @app.post("/texts")
-async def write_text(text: Text):
+def write_text(text: Text):
     try:
         db.insert_text(text.dict())
     except requests.ConnectionError:
