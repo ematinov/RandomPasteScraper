@@ -1,0 +1,4 @@
+1. install packages from requirements.txt
+2. run main.py
+
+For docs and easy function check use "/docs" path.
