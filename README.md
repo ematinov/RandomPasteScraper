@@ -12,3 +12,7 @@ Originally developed as a project for BSU "High Load Web Systems" course.
 
 
 + Opportunity to find someone's usernames, passwords, emails, IP addresses and maybe more.
+
+## CAP and docs
+
+https://docs.google.com/document/d/1KaiHwtzvflqZDZSVfFqh7MwLGHbk83RlVZPiKh57qGo/edit?usp=sharing 
